@@ -14,6 +14,29 @@ document.getElementById("add-user").addEventListener("click", function () {
   document.querySelector("form").insertBefore(newUserInput, this);
 });
 
+document.getElementById("reset-button").addEventListener("click", function () {
+  // Clear all input fields except the first one and the tables and the graph and also user table
+
+  document.querySelectorAll("table")?.forEach(table => table.remove());
+
+  document.getElementById("common-table")?.remove();
+  document.getElementById("unique-table")?.remove();
+  document.getElementById("rating-graph")?.remove();
+  document.getElementById("user-data").innerHTML = "";
+
+
+  const inputs = document.getElementsByName("username");
+  for (let i = 1; i < inputs.length; i++) {
+    inputs[i].value = "";
+  }
+  inputs[0].value = "";
+
+  // Disable track button until new submission
+  const trackBtn = document.getElementById("track-button");
+  if (trackBtn) trackBtn.disabled = true;
+
+}); 
+
 document.querySelector("form").addEventListener("submit", function (event) {
   event.preventDefault();
   const usernames = Array.from(document.getElementsByName("username"))
@@ -27,7 +50,9 @@ document.querySelector("form").addEventListener("submit", function (event) {
   graph_each(usernames).catch(err => console.error("Graph error:", err));
 
   // use querySelector(form) instead of getElementById on a form that doesn't exist
-  document.querySelector("form").reset();
+  
+  
+
   const trackBtn = document.getElementById("track-button");
   if (trackBtn) trackBtn.disabled = false;
 });
@@ -162,8 +187,7 @@ async function fetchRecentAcSubmissions(username, limit = 15) {
     throw new Error("Username should not be empty");
   }
 
-  const proxyUrl = "https://cors-anywhere.herokuapp.com/";
-  const targetUrl = "https://leetcode.com/graphql/";
+  
 
   const headers = new Headers();
   headers.append("content-type", "application/json");
@@ -183,8 +207,12 @@ async function fetchRecentAcSubmissions(username, limit = 15) {
     variables: { username, limit },
   });
 
-  const res = await fetch(proxyUrl + targetUrl, { method: "POST", headers, body });
+  const res = await fetch('/api/graphql', {
 
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body
+  });
   if (res.status === 403) {
     throw new Error(
       "403 (CORS blocked). Go to https://cors-anywhere.herokuapp.com/corsdemo and request temporary access, or use your own proxy."
@@ -209,8 +237,6 @@ async function fetchAttendedContests(username, maxResults = 200) {
     throw new Error("Username should not be empty");
   }
 
-  const proxyUrl = "https://cors-anywhere.herokuapp.com/";
-  const targetUrl = "https://leetcode.com/graphql/";
 
   const headers = new Headers();
   headers.append("content-type", "application/json");
@@ -237,9 +263,9 @@ async function fetchAttendedContests(username, maxResults = 200) {
 
   const body = JSON.stringify({ query, variables: { username } });
 
-  const res = await fetch(proxyUrl + targetUrl, {
-    method: "POST",
-    headers,
+  const res = await fetch('/api/graphql', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
     body
   });
 
