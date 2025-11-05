@@ -7,15 +7,23 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1> welcome to leet tracker</h1>
-    <form action="">
+    <h1> welcome to leetcode tracker</h1>
+    <form id="user-form" action="">
         <label for="username">Enter your LeetCode username:</label>
         <input type="text" id="username" name="username" required>
         <button type="button" id="add-user">Add More Users</button>
         <button type="submit">Track</button>
         <button type="reset">Reset</button>
-    </form>
 
+    </form>
+        <div id="user-data"></div>
+       
+        <div id="error" class="error"> </div>
+        <div id="success" class="success"> </div>
+        
+
+    <!-- now i we are making the rating graph of the user where rating of all user show in the single graph -->
+    
 
     <script src="app.js"></script>
 </body>
