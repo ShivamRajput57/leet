@@ -244,4 +244,72 @@ input[type="text"] {
   height: 100% !important;  /* ensure canvas fills the container */
   display: block;
 }
+/* 
+footer {
+    text-align: center;
+    margin-top: 40px;
+    padding: 20px;
+    background-color: #f4f4f4;
+    border-top: 1px solid #ddd;
+    background-color: #333; 
+    color: white;
+    text-decoration: none;
+    position: relative ;
+    z-index: 1;
+    bottom: 0%;;
+}
+footer a {
+    color: white;
+    text-decoration: none;
+    margin: 0 10px;
+}
+/* style.css — sticky footer using flexbox */
+/* html, body {
+  height: 100%;
+  margin: 0;           /* ensure no extra body margin */
+  /* padding: 0;
+} */
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;   /* makes body fill viewport */
+}
+
+/* main will expand to fill available space so footer stays at bottom */
+/* main {
+  flex: 1 0 auto;
+  padding: 20px;       /* optional spacing */
+
+
+/* Footer styles */
+/* footer {
+  flex-shrink: 0;
+  padding: 12px 16px;
+  text-align: center;
+  background: #222;
+  color: #fff;
+  border-top: 1px solid rgba(255,255,255,0.06);
+} */ 
+
+/* i want to set my footer to bottom of page */
+footer {
+    position: fixed;
+    
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #333; 
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+}
+footer a {
+    color: white;
+    text-decoration: none;
+    margin: 0 10px;
+}
+footer a:hover {
+    text-decoration: underline;
+}   
 
